@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Flight List</title>
+</head>
+
+<body>
+    <h2>Hello! </h2>
+
+    <h3>View Flight</h3>
+
+    <div th:if="${flights.isEmpty()}">
+        <h4>No Flight Yet Until Now</h4>
+    </div>
+    <div th:if="${!flights.isEmpty()}">
+        <div th:each = "flight : ${flights}">
+            <h5 th:text = "'Nomor Penerbangan: ' + ${flight.getFlightNumber()}"></h5>
+            <h5 th:text = "'Rute Penerbangan: ' + ${flight.origin} + ' ke ' + ${flight.getDestination()}"></h5>
+            <h5 th:text = "'Nama Pilot: ' + ${flight.getPilot().getName()}"></h5>
+            <h5 th:text = "'Nomor Lisensi Pilot: ' + ${flight.getPilot().getLicenseNumber()}"></h5>
+            <h5><a th:href="@{'/flight/view/' + ${flight.getFlightNumber()}}">See Detail</a></h5>
+            <h5>========================================================================</h5>
+        </div>
+    </div>
+</body>
+</html>
