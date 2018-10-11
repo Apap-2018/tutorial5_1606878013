@@ -10,6 +10,6 @@ public interface FlightService {
     FlightModel findFlightById(long id);
     void deleteFlight(FlightModel flight);
     void updateFlight(FlightModel flight, String flightNumber, String origin, String destination, Date time);
-    FlightModel getFlightDetailByFlightNumber (String flightNumber);
     List<FlightModel> getAllFlights();
+    List<FlightModel> findFlightByName(String flightNumber);
 }

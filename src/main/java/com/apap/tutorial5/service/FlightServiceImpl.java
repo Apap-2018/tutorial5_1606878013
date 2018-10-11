@@ -40,12 +40,12 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public FlightModel getFlightDetailByFlightNumber(String flightNumber) {
-        return flightDb.findByFlightNumber(flightNumber);
+    public List<FlightModel> getAllFlights() {
+        return flightDb.findAll();
     }
 
     @Override
-    public List<FlightModel> getAllFlights() {
-        return flightDb.findAll();
+    public List<FlightModel> findFlightByName(String flightNumber) {
+        return flightDb.findFlightByName(flightNumber);
     }
 }

@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Flight List</title>
+    <title id="pageTitle">Flight List</title>
+    <object th:include = "fragments/fragment :: css" th:remove = "tag"></object>
+    <object th:include = "fragments/fragment :: js" th:remove = "tag"></object>
 </head>
 
 <body>
-    <h2>Hello! </h2>
-
+    <nav th:replace = "fragments/fragment :: navbar"></nav>
     <h3>View Flight</h3>
 
     <div th:if="${flights.isEmpty()}">
@@ -15,12 +16,28 @@
     </div>
     <div th:if="${!flights.isEmpty()}">
         <div th:each = "flight : ${flights}">
-            <h5 th:text = "'Nomor Penerbangan: ' + ${flight.getFlightNumber()}"></h5>
-            <h5 th:text = "'Rute Penerbangan: ' + ${flight.origin} + ' ke ' + ${flight.getDestination()}"></h5>
-            <h5 th:text = "'Nama Pilot: ' + ${flight.getPilot().getName()}"></h5>
-            <h5 th:text = "'Nomor Lisensi Pilot: ' + ${flight.getPilot().getLicenseNumber()}"></h5>
-            <h5><a th:href="@{'/flight/view/' + ${flight.getFlightNumber()}}">See Detail</a></h5>
-            <h5>========================================================================</h5>
+            <table>
+                <tr>
+                    <th>Flight Name</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Time</th>
+                    <th>Pilot</th>
+                    <th>Pilot License Number</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each = "flight : ${flights}">
+                    <td th:text="${flight.flightNumber}"></td>
+                    <td th:text="${flight.origin}"></td>
+                    <td th:text="${flight.destination}"></td>
+                    <td th:text="${flight.time}"></td>
+                    <td th:text="${flight.pilot.name}"></td>
+                    <td th:text="${flight.pilot.licenseNumber}"></td>
+                    <td><a href="@{|/flight/update/${flight.id}|}">Update</a></td>
+                    <td><a href="@{|/flight/delete/${flight.id}|}">Delete</a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
